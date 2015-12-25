@@ -1,11 +1,17 @@
 package com.example.parsertest;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
+import android.widget.SimpleExpandableListAdapter;
+import android.widget.TextView;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -19,31 +25,53 @@ import java.util.Map;
 public class MainActivity extends Activity {
 
 
-    public ArrayList<HashMap<String ,String>> mapArrayListOfHrefs;
-    public ArrayList<ArrayList<HashMap<String , String>>> mapArrayListOfHrefsForSpecificProduct = new ArrayList<ArrayList<HashMap<String, String>>>();
+
+    public ArrayList<Map<String ,String>> mapArrayListOfHrefs;
+    public ArrayList<ArrayList<Map<String , String>>> mapArrayListOfHrefsForSpecificProduct;
 
 
     public ArrayList<String> titleList = new ArrayList<String>();
-    private ArrayAdapter<String> adapter;
-    private ListView lv;
+   // private ArrayAdapter<String> adapter;
+    ExpandableListView elvMain;
+    AdapterHelper adapterHelper;
+    SimpleExpandableListAdapter adapter;
+
+    String c1;
+    TextView v;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        v  = (TextView)findViewById(R.id.textView);
+        mapArrayListOfHrefs = new ArrayList<Map<String, String>>();
+        mapArrayListOfHrefsForSpecificProduct = new ArrayList<ArrayList<Map<String, String>>>();
+        //elvMain = (ExpandableListView) findViewById(R.id.elvMain);
+        //adapterHelper = new AdapterHelper(this,mapArrayListOfHrefsForSpecificProduct, mapArrayListOfHrefs);
+        //adapter = adapterHelper.getAdapter();
+      //  elvMain = (ExpandableListView)findViewById(R.id.elvMain);
 
-        lv = (ListView) findViewById(R.id.listView1);
+        new NewThread(this).execute();
 
-        new NewThread().execute();
-
-        adapter = new ArrayAdapter<String>(this, R.layout.item, R.id.item, titleList);
+        //adapter = new ArrayAdapter<String>(this, R.layout.item, R.id.item, titleList);
     }
 
 
-    public class NewThread extends AsyncTask<String, Void, String> {
+    public class NewThread extends AsyncTask<Void, Integer, Void> {
+
+        private Context mContext;
+
+        public NewThread (Context context){
+            mContext = context;
+        }
 
         @Override
-        protected String doInBackground(String... arg) {
+        protected Void doInBackground(Void... voids) {
+
+
+            String c = "asdf";
+            c1 = c;
+
 
             mapArrayListOfHrefs = new ParserOfMainProductsGroup().getMapArrayListOfHrefs();
             Log.d("TAG", String.valueOf(mapArrayListOfHrefs));
@@ -56,7 +84,7 @@ public class MainActivity extends Activity {
             // TODO 4-th listviev of saved recipes
             // TODO 5-th recipe (information about products and amount of them we need to cover by daily demand in microelements)
             // TODO attach ui expandeblelist
-            ArrayList<HashMap<String ,String>> temporaryInnerList;
+            ArrayList<Map<String ,String>> temporaryInnerList;
             for (Map<String,String> m : mapArrayListOfHrefs){
                 String t = m.entrySet().iterator().next().getKey();
                 Log.d("Ref for product ", t);
@@ -64,13 +92,28 @@ public class MainActivity extends Activity {
                 Log.d("TAG", String.valueOf(temporaryInnerList));
                mapArrayListOfHrefsForSpecificProduct.add(temporaryInnerList);
             }
-            
+
+
+
             return null;
         }
 
-        @Override
-        protected void onPostExecute(String result) {
 
+        @Override
+        protected void onProgressUpdate(Integer... values){
+         //   adapterHelper = new AdapterHelper(mContext,mapArrayListOfHrefsForSpecificProduct, mapArrayListOfHrefs);
+         //   adapter = adapterHelper.getAdapter();
+         //   elvMain = (ExpandableListView)findViewById(R.id.elvMain);
+         //   elvMain.setAdapter(adapter);
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            v.setText(c1);
+            adapterHelper = new AdapterHelper(mContext,mapArrayListOfHrefsForSpecificProduct, mapArrayListOfHrefs);
+            adapter = adapterHelper.getAdapter();
+            elvMain = (ExpandableListView)findViewById(R.id.elvMain);
+            elvMain.setAdapter(adapter);
         }
     }
 }

@@ -8,6 +8,5 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
-        android:id="@+id/productView"
-        android:layout_gravity="center_horizontal" />
+        android:id="@+id/productGroupView" />
 </LinearLayout>

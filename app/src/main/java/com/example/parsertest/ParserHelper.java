@@ -35,7 +35,7 @@ public class ParserHelper {
             // get tables with necessary components
             elements = doc.select("div[class=cnt_main_block_content]");
 
-            // neeed "i" because we have more div tags that necessary
+            // need "i" because we have more div tags that necessary
             int i = 0;
             oneProduct = new ArrayList<ArrayList<ProductComponents>>(4);
             ArrayList<ProductComponents> innerProduct;

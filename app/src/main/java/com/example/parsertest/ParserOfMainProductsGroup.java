@@ -18,8 +18,7 @@ import java.util.Map;
 // class for getting the list of refs for product groups
 public class ParserOfMainProductsGroup {
 
-    ArrayList<HashMap<String, String >> mapArrayListOfHrefs;
-
+    ArrayList<Map<String, String >> mapArrayListOfHrefs;
 
     ParserOfMainProductsGroup(){
         Document doc;
@@ -29,8 +28,8 @@ public class ParserOfMainProductsGroup {
             Element table;
             Elements rows;
 
-            mapArrayListOfHrefs = new ArrayList<HashMap<String, String>>();
-            HashMap<String ,String > map;
+            mapArrayListOfHrefs = new ArrayList<Map<String, String>>();
+            Map<String ,String > map;
 
             // get table that we need
             table = doc.getElementsByTag("tbody").get(8);
@@ -66,7 +65,7 @@ public class ParserOfMainProductsGroup {
         }
     }
 
-    public ArrayList<HashMap<String, String >> getMapArrayListOfHrefs(){
+    public ArrayList<Map<String, String >> getMapArrayListOfHrefs(){
         return this.mapArrayListOfHrefs;
     }
 }

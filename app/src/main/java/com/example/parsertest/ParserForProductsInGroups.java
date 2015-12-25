@@ -21,7 +21,7 @@ public class ParserForProductsInGroups {
     //ref that get from PareserOfMainProductsGroup
     String hrefForSpecificProduct;
     // list of refs for specific product
-    ArrayList<HashMap<String, String >> mapArrayList;
+    ArrayList<Map<String, String >> mapArrayList;
 
     ParserForProductsInGroups(String hrefForSpecificProduct){
         Document doc;
@@ -31,7 +31,7 @@ public class ParserForProductsInGroups {
             doc = Jsoup.connect(this.hrefForSpecificProduct).get();
             Elements tables;
 
-            mapArrayList = new ArrayList<HashMap<String, String>>();
+            mapArrayList = new ArrayList<Map<String, String>>();
             HashMap<String, String > map;
             // choose all tables with products
             tables = doc.select("tbody:contains(гр.)");
@@ -57,7 +57,7 @@ public class ParserForProductsInGroups {
         }
     }
 
-    public ArrayList<HashMap<String, String >> getMapArrayList(){
+    public ArrayList<Map<String, String >> getMapArrayList(){
         return this.mapArrayList;
     }
 }
