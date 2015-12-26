@@ -14,7 +14,7 @@ public class AdapterHelper  {
 
     final String PRODUCT_GROUPS = "product groups";
     final String SPECIFIC_PRODUCT = "specific product";
-//
+
     ArrayList<Map<String ,String>> mapArrayListOfHrefs;
     ArrayList<ArrayList<Map<String , String>>> mapArrayListOfHrefsForSpecificProduct;
 
