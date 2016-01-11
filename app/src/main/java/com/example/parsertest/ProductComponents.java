@@ -31,6 +31,7 @@ public class ProductComponents {
 
         if(m.find()){
             name = m.group();
+
         }
 
         p = Pattern.compile(s2);

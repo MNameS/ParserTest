@@ -56,9 +56,9 @@ public class ParserOfMainProductsGroup {
                 //
             }
 
-            for (Map<String ,String> m : mapArrayListOfHrefs){
+          /*  for (Map<String ,String> m : mapArrayListOfHrefs){
                 Log.d("Map filling: ", m.entrySet().iterator().next().getKey() + " " + m.entrySet().iterator().next().getValue());
-            }
+            }*/
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -28,6 +28,7 @@ public class ParserForProductsInGroups {
         this.hrefForSpecificProduct = hrefForSpecificProduct;
         try {
             Log.d("Ref for product", hrefForSpecificProduct);
+            // TODO need connection exeption hire
             doc = Jsoup.connect(this.hrefForSpecificProduct).get();
             Elements tables;
 
@@ -49,9 +50,9 @@ public class ParserForProductsInGroups {
                 }
             }
 
-            for (Map<String , String > m : mapArrayList) {
+        /*    for (Map<String , String > m : mapArrayList) {
                 Log.d("Map filling: ", m.entrySet().iterator().next().getKey() + " " + m.entrySet().iterator().next().getValue() + " td");
-            }
+            }*/
         } catch (IOException e) {
             e.printStackTrace();
         }

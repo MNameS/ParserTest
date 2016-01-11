@@ -17,9 +17,7 @@ public class AdapterHelper  {
 
     ArrayList<Map<String ,String>> mapArrayListOfHrefs;
     ArrayList<ArrayList<Map<String , String>>> mapArrayListOfHrefsForSpecificProduct;
-
     ArrayList<ArrayList<Map<String , String>>> mapArrayListOfHrefsForSpecificProductToSetForExpandebleListView;
-
     ArrayList<Map<String ,String>> temporaryHelperForMapArrayListOfHrefs;
 
     ArrayList<Map<String ,String>> gr;
