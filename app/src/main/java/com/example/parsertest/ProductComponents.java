@@ -22,16 +22,18 @@ public class ProductComponents {
 
     private void setComponents(){
         String s1,s2,s3;
-        s1 = "\\D+";
+
+        s1 = "(\\D+)\\s\\S*\\s(\\D+)";
+        //s1 = "\\D+";
         s2 = "\\d+\\W?\\d*";
-        s3 = "\\D+";
+
 
         Pattern p = Pattern.compile(s1);
         Matcher m = p.matcher(tempStr);
 
         if(m.find()){
-            name = m.group();
-
+            name = m.group(1);
+            measure = m.group(2);
         }
 
         p = Pattern.compile(s2);
@@ -55,12 +57,7 @@ public class ProductComponents {
 
         }
 
-        p = Pattern.compile(s3);
-        m = p.matcher(tempStr);
 
-        if(m.find()){
-            measure = m.group();
-        }
 
     }
 

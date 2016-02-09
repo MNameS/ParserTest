@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -28,6 +29,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -214,36 +216,92 @@ public class MainActivity extends Activity {
 
             Log.d("finish", "result1");
 
+            Map<String ,String> nutritionalValueMap = new HashMap<String, String>();
+            Map<String ,String> vitaminsMap = new HashMap<String, String>();
+            String[] macronutrients = new String[TableNamesData.getMacronutrientsLength()];
+            String[] microelements = new String [TableNamesData.getMicroelementsLength()];
 
-/*
+            nutritionalValueMap = TableNamesData.getNutritionalValueMap();
+            vitaminsMap = TableNamesData.getVitaminsMap();
+            macronutrients = TableNamesData.getMacronutrients();
+            microelements = TableNamesData.getMicroelements();
+
+            int j = 0;
             for (ArrayList<Map<String , String >> ar : mapArrayListOfHrefsForSpecificProduct){
                 for(Map<String ,String > m : ar){
                     String s = m.entrySet().iterator().next().getKey();
                     oneProduct = new ParserHelper(s).getOneProductArrayList();
 
                     String[] productTables = new String[] {"Nutritional_value", "Vitamins", "Macronutrients", "Microelements"};
-                    String[] columnsCount;
+                    String[] columnsNames;
                     int i = 0;
-                    for (ArrayList<ProductComponents> arrayList : oneProduct){
+
+                    Iterator<ArrayList<ProductComponents>> iterator = oneProduct.iterator();
+
+                    ArrayList<ProductComponents> temp = iterator.next();
+
+                    ContentValues contentValues = new ContentValues();
+                    Cursor c = sqLiteDatabase.query("Nutritional_value",null,null,null,null,null,null);
+                    columnsNames = c.getColumnNames();
+                 //   Arrays.asList(columnsNames).contains()
+
+                    for (ProductComponents p : temp){
+                        //Log.d("BEFNUTR", p.name);
+                       // Log.d("NUTR", nutritionalValueMap.get(p.name));
+                       // SystemClock.sleep(10000);
+                        boolean check = Arrays.asList(columnsNames).contains(nutritionalValueMap.get(p.name));
+                        if(check)
+                            contentValues.put(nutritionalValueMap.get(p.name), p.amount.toString() + p.measure);
+
+                      //  Log.d("NUTRVAL", contentValues.toString());
+                    }
+                        sqLiteDatabase.insert("Nutritional_value", null, contentValues);
+
+                    i++;
+                    Log.d("NUTRVAL", String.valueOf(i));
+                    if(i==10)
+                        break;
+/*
+                    Log.d("  ",   "   ");
+
+                    temp = iterator.next();
+                    for (ProductComponents p : temp){
+                        Log.d("VITAMINS", p.tempStr);
+                    }
+
+                    Log.d("  ", "   ");
+*/
+
+
+                    /*for (ArrayList<ProductComponents> arrayList : oneProduct){
+
+
                         ContentValues contentValues = new ContentValues();
                         Cursor c = sqLiteDatabase.query(productTables[i],null,null,null,null,null,null);
                         columnsCount = c.getColumnNames();
                         for (ProductComponents p : arrayList){
-                            if(p.name.equals(columnsCount.toString().contains(p.name)))
+                            if(nutritionalValueMap.containsKey(p.name) || vitaminsMap.containsKey(p.name) || macronutrients.toString().contains(p.name) || microelements.toString().contains(p.name))
                                 contentValues.put(p.name, p.amount.toString() + p.measure);
 
                             //Log.d("product", p.tempStr);
                         }
-                        sqLiteDatabase.insert(productTables[i], null, contentValues);
+
+                        if(contentValues.size()>0){
+                            sqLiteDatabase.insert(productTables[i], null, contentValues);
+                            Log.d("finish", "result213");
+                        }
+
                         i++;
+
                         //Log.d("product", "--------------------");
                     }
-
+*/
 
 
                 }
+
             }
-*/
+
             Log.d("finish", "result");
 
 

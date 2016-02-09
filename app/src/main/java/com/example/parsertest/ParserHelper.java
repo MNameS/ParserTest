@@ -24,7 +24,7 @@ public class ParserHelper {
 
     public ParserHelper(String htmlPagePath){
         Document doc;
-        String LOG_TAG = "MyLog";
+        String LOG_TAG = "MyLogELEM";
         this.htmlPagePath = htmlPagePath;
         try {
 
@@ -45,7 +45,7 @@ public class ParserHelper {
             // fill "oneProduct" array
             for (Element r : elements){
                 innerProduct = new ArrayList<ProductComponents>();
-        //        Log.d(LOG_TAG, "the btginning of cycle foreach i = " + i);
+               // Log.d(LOG_TAG, "the btginning of cycle foreach i = " + i + " " + r.toString());
                 Elements tempElements = r.children();
                 for(Element r1 : tempElements){
                     tempStr = r1.text();
