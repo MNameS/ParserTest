@@ -61,6 +61,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         v  = (TextView)findViewById(R.id.textView);
+        Log.d("a","a");
+        Log.d("a","a");
         mapArrayListOfHrefs = new ArrayList<Map<String, String>>();
         Log.d("z", "z");
         mapArrayListOfHrefsForSpecificProduct = new ArrayList<ArrayList<Map<String, String>>>();
