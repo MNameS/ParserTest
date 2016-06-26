@@ -62,6 +62,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         v  = (TextView)findViewById(R.id.textView);
         mapArrayListOfHrefs = new ArrayList<Map<String, String>>();
+        Log.d("z", "z");
         mapArrayListOfHrefsForSpecificProduct = new ArrayList<ArrayList<Map<String, String>>>();
         oneProduct = new ArrayList<ArrayList<ProductComponents>>(4);
         //elvMain = (ExpandableListView) findViewById(R.id.elvMain);
